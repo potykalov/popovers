@@ -1,0 +1,24 @@
+.tooltip {
+  position: absolute;
+  border: 1px solid #9c9c9c;
+  border-radius: 5px;
+  width: fit-content;
+  max-width: 200px;
+}
+
+.tooltip__header {
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid #9c9c9c;
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  color: #000000;
+}
+
+.tooltip__content {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+}
