@@ -59,7 +59,7 @@ jobs:
 
       - run: yarn
 
-      - run: yarn build
+      - run: yarn prod
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
