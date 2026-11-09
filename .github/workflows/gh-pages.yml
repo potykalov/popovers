@@ -1,4 +1,4 @@
-name: Continuous Deployment
+name: Netology AHJ
 
 on:
   push:
@@ -16,7 +16,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  eslint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.14.0
+          cache: "yarn"
+      - run: yarn
+      - run: yarn lint
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.14.0
+          cache: "yarn"
+      - run: yarn
+      - run: yarn test
+
   build:
+    needs: [eslint, test]
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
 
     steps:
@@ -25,17 +55,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22.14.0
-          cache: "npm"
+          cache: "yarn"
 
-      - run: npm ci
+      - run: yarn
 
-      - run: npm run build
+      - run: yarn build
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: "dist"
 
