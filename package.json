@@ -8,7 +8,8 @@
     "dev": "webpack --mode=development",
     "start": "webpack serve",
     "watch": "webpack --watch",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest --passWithNoTests"
   },
   "devDependencies": {
     "@babel/core": "^8.1.0",
